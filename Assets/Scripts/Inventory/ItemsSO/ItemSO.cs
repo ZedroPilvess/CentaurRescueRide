@@ -1,16 +1,20 @@
 using UnityEngine;
 
+public enum ItemType
+{
+    Gun,
+    Bomb,
+    Shuriken,
+    Punch
+
+
+
+}
+
+[CreateAssetMenu(fileName = "NovoItem",menuName ="items")]
 public class ItemSO : ScriptableObject {
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public ItemType Type;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public Sprite itemSprite;
 }
