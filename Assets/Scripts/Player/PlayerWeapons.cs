@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class PlayerWeapons : MonoBehaviour
 {
@@ -39,9 +40,16 @@ public class PlayerWeapons : MonoBehaviour
 
     }
 
+    bool IsMouseOverUI()
+    {
+        return EventSystem.current != null &&
+               EventSystem.current.IsPointerOverGameObject();
+    }
+
     private void StopShoot()
     {
-        if(ps.equipedItem == null) return;
+        if (IsMouseOverUI()) return;
+        if (ps.equipedItem == null) return;
         switch (ps.equipedItem.Type)
         {
              
@@ -57,6 +65,7 @@ public class PlayerWeapons : MonoBehaviour
 
     void Shoot()
     {
+        if(IsMouseOverUI()) return; 
         if (!isPreparing && ps.equipedItem != null )
         {
             

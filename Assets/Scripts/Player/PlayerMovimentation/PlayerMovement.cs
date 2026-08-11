@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +10,9 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] InputAction moveAction;
     [SerializeField] InputAction turnAction;
+    [SerializeField] InputAction breakAction;
+
+    [SerializeField] float breakForce = 5f; 
 
     [SerializeField] float moveValue;
     [SerializeField] float turnValue;
@@ -21,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     {
         moveAction = InputSystem.actions.FindAction("Foward");
         turnAction = InputSystem.actions.FindAction("Turn");
-
+        breakAction = InputSystem.actions.FindAction("Break");  
         rigidbody = GetComponent<Rigidbody2D>();
 
        
@@ -31,6 +35,15 @@ public class PlayerMovement : MonoBehaviour
     {
         Move();
         Rotate();
+        Break();    
+    }
+
+    void Break()
+    {
+        if (breakAction.IsPressed() && rigidbody.linearVelocity.magnitude > 0.01f)
+        {
+            rigidbody.AddForce(-rigidbody.linearVelocity.normalized * breakForce,ForceMode2D.Force);
+        }
     }
 
     void Move()
