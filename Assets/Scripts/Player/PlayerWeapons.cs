@@ -30,6 +30,10 @@ public class PlayerWeapons : MonoBehaviour
     [SerializeField] private bool isPreparing = false;
     [SerializeField] private float preparationCount = 0f;
 
+
+    [Header("UI")]
+    [SerializeField] bool isOverUI = false; 
+
     void Start()
     {
         shoot = InputSystem.actions.FindAction("Shoot");
@@ -40,15 +44,14 @@ public class PlayerWeapons : MonoBehaviour
 
     }
 
-    bool IsMouseOverUI()
+    private void Update()
     {
-        return EventSystem.current != null &&
-               EventSystem.current.IsPointerOverGameObject();
+        isOverUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
     }
 
     private void StopShoot()
     {
-        if (IsMouseOverUI()) return;
+        if (isOverUI) return;
         if (ps.equipedItem == null) return;
         switch (ps.equipedItem.Type)
         {
@@ -65,7 +68,7 @@ public class PlayerWeapons : MonoBehaviour
 
     void Shoot()
     {
-        if(IsMouseOverUI()) return; 
+        if(isOverUI) return; 
         if (!isPreparing && ps.equipedItem != null )
         {
             

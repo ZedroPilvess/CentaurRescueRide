@@ -1,16 +1,28 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NpcScript : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] GameObject npcDialogueUI;
+    [SerializeField] Button denyBtn;
+    [SerializeField] Button acceptBtn;
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if(collision.CompareTag("Player"))
+        {
+            npcDialogueUI.SetActive(true);
+        }
+
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        
+
+        if (collision.CompareTag("Player"))
+        {
+            npcDialogueUI.SetActive(false);
+        }
     }
 }
