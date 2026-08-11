@@ -6,27 +6,35 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
-    [SerializeField] List<ItemSO> itemsList = new List<ItemSO>();
+    [Header("Inventory")]
+    [SerializeField] private List<ItemSO> itemsList = new List<ItemSO>();
+    [SerializeField] private int inventorySize = 4;
+    [SerializeField] private int currentItem = 0;
 
 
-    [SerializeField] List<Image> imagesList = new List<Image>();
 
-    [SerializeField] InputAction inventoryLeft;
-    [SerializeField] InputAction inventoryRight;
-    [SerializeField] InputAction inventoryDrop;
+    [Header("Input")]
+    [SerializeField] private InputAction inventoryLeft;
+    [SerializeField] private InputAction inventoryRight;
+    [SerializeField] private InputAction inventoryDrop;
 
-    [SerializeField]  int inventorySize = 4;
+    [Header("UI")]
+    [SerializeField] private List<Image> imagesList = new List<Image>();
+    [SerializeField] private RectTransform selectedUI;
+    [SerializeField] private List<RectTransform> itemUIPosition = new List<RectTransform>();
 
-    [SerializeField] int currentItem = 0;
+    [Header("Player")]
+    [SerializeField] private PlayerStats ps;
 
-    [SerializeField] ItemSO emptyItem;
+    [Header("Items")]
+    [SerializeField] private ItemSO fuzilItem;
+    [SerializeField] private ItemSO bombItem;
+    [SerializeField] private ItemSO shurikenItem;
+    [SerializeField] private ItemSO punchItem;
+    [SerializeField] private ItemSO emptyItem;
 
-    [SerializeField] bool invTest = true;
-
-
-    [SerializeField] RectTransform selectedUI;
-
-    [SerializeField] List<RectTransform> itemUIPosition = new List<RectTransform>();        
+    //[Header("Testing")]
+    //[SerializeField] private bool invTest = true;
 
 
     private void Start()
@@ -35,8 +43,8 @@ public class InventoryManager : MonoBehaviour
         inventoryRight = InputSystem.actions.FindAction("InventoryRight");
         inventoryDrop = InputSystem.actions.FindAction("DestroyItem");
         
-        UpdateUI();
-
+      //  UpdateUI();
+         
         inventoryLeft.performed += ctx => MoveLeft();
         inventoryRight.performed += ctx => MoveRight();
         inventoryDrop.performed += ctx => DropItem();
@@ -51,7 +59,7 @@ public class InventoryManager : MonoBehaviour
             currentItem = inventorySize - 1;
         }
         Debug.Log("Current item index: " + currentItem);
-
+        
         UpdateUI();
     }   
 
@@ -70,6 +78,7 @@ public class InventoryManager : MonoBehaviour
     void DropItem()
     {
                RemoveItem(currentItem);
+         
         Debug.Log("Item dropped from index: " + currentItem);
 
     
@@ -96,11 +105,12 @@ public class InventoryManager : MonoBehaviour
 
     private void Update()
     {
-        if (invTest == false)
-        {
-            RemoveItem(currentItem);  
-        }
-  
+        //if (invTest == false)
+        //{
+        //    RemoveItem(currentItem);  
+        //}
+
+        
     }
 
     public void RemoveItem(int index)
@@ -108,9 +118,26 @@ public class InventoryManager : MonoBehaviour
 
         imagesList[index].sprite = emptyItem.itemSprite;
         itemsList[index] = emptyItem;
+        UpdateItem();       
 
 
+    }
 
+    public void SaveGame()
+    {
+        PlayerPrefs.SetString("Inventory", string.Join(",", itemsList.ConvertAll(item => item.name)));
+        PlayerPrefs.SetInt("RescuedTargets", ps.rescuedTargets);
+
+        PlayerPrefs.SetInt("PlayerHP", ps.hp);
+
+        PlayerPrefs.SetString("EquippedItem", itemsList[currentItem].name);
+
+        PlayerPrefs.SetFloat("PlayerX", ps.playerObj.transform.position.x);
+        PlayerPrefs.SetFloat("PlayerY", ps.playerObj.transform.position.y);
+
+
+        PlayerPrefs.Save();
+        Debug.Log("Game saved successfully!");
     }
 
     void UpdateUI()
@@ -125,11 +152,15 @@ public class InventoryManager : MonoBehaviour
         }
 
 
-
+      UpdateItem(); 
 
         selectedUI.position = itemUIPosition[currentItem].position + new Vector3(-3.5f, 4, 0); 
     }
 
+    public void UpdateItem()
+    {
+               ps.equipedItem = itemsList[currentItem];
+    }
 
     public bool IsIventoryFull()
     {

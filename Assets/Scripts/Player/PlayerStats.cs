@@ -2,11 +2,17 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    [SerializeField] int hp;
+    [SerializeField] public int hp;
     
-    [SerializeField] int maxHP = 100;
+    [SerializeField] public int maxHP = 100;
+
+    [SerializeField] public int rescuedTargets = 0; 
 
     [SerializeField] InventoryManager inventoryManager;
+
+    [SerializeField] public GameObject playerObj;
+
+    [SerializeField] public ItemSO equipedItem;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

@@ -1059,7 +1059,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 536.53, y: -19.031}
+  m_AnchoredPosition: {x: 27, y: -17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &819235553
@@ -1645,7 +1645,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   hp: 0
   maxHP: 0
+  rescuedTargets: 0
   inventoryManager: {fileID: 1316655059}
+  playerObj: {fileID: 1187589303}
+  equipedItem: {fileID: 0}
+--- !u!114 &1187589309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187589303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28c53fc3611af8b4f840c82b274f8f6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerWeapons
 --- !u!1001 &1295512715
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1773,11 +1788,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 910f095fefc08ec48a483f29a438d8ca, type: 2}
   - {fileID: 11400000, guid: 910f095fefc08ec48a483f29a438d8ca, type: 2}
   - {fileID: 11400000, guid: 910f095fefc08ec48a483f29a438d8ca, type: 2}
-  imagesList:
-  - {fileID: 387208851}
-  - {fileID: 1027956567}
-  - {fileID: 905570446}
-  - {fileID: 208795154}
+  inventorySize: 4
+  currentItem: 0
   inventoryLeft:
     m_Name: Inventory Left
     m_Type: 0
@@ -1808,16 +1820,23 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
     m_Priority: 0
-  inventorySize: 4
-  currentItem: 0
-  emptyItem: {fileID: 11400000, guid: 910f095fefc08ec48a483f29a438d8ca, type: 2}
-  invTest: 1
+  imagesList:
+  - {fileID: 387208851}
+  - {fileID: 1027956567}
+  - {fileID: 905570446}
+  - {fileID: 208795154}
   selectedUI: {fileID: 819235552}
   itemUIPosition:
   - {fileID: 376294376}
   - {fileID: 1842572848}
   - {fileID: 1040711668}
   - {fileID: 1875370019}
+  ps: {fileID: 1187589308}
+  fuzilItem: {fileID: 0}
+  bombItem: {fileID: 0}
+  shurikenItem: {fileID: 0}
+  punchItem: {fileID: 0}
+  emptyItem: {fileID: 11400000, guid: 910f095fefc08ec48a483f29a438d8ca, type: 2}
 --- !u!1001 &1405339045
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2048,6 +2067,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1875370018}
   m_CullTransparentMesh: 1
+--- !u!1 &2071111468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2071111469}
+  m_Layer: 0
+  m_Name: ProjectilePoints
+  m_TagString: Untagged
+  m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2071111469
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2071111468}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.454, y: 0.51, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2121182990}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2121182989
 GameObject:
   m_ObjectHideFlags: 0
@@ -2078,7 +2128,8 @@ Transform:
   m_LocalPosition: {x: -0.02, y: 1.16, z: 0}
   m_LocalScale: {x: 0.733228, y: 0.8276591, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2071111469}
   m_Father: {fileID: 1187589305}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2121182991
@@ -2240,6 +2291,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 215701923676777820, guid: 4e4b64615be3002458fa82067d875f97, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1187589306}
+    - targetCorrespondingSourceObject: {fileID: 215701923676777820, guid: 4e4b64615be3002458fa82067d875f97, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1187589309}
   m_SourcePrefab: {fileID: 100100000, guid: 4e4b64615be3002458fa82067d875f97, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
