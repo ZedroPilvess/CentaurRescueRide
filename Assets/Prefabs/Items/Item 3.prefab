@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7093749704367924284}
   - component: {fileID: 4262141640975955445}
   m_Layer: 8
-  m_Name: Item
+  m_Name: Item 3
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,4 +152,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a21bbf537988e8408182d6e1e9b34ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemCollectable
-  Item: {fileID: 11400000, guid: 937d7e21d72b9fb43a23f89e10f028b5, type: 2}
+  Item: {fileID: 11400000, guid: 49010e7970fc1fb4a9562c18a59bb7ec, type: 2}

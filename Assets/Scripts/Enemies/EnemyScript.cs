@@ -1,16 +1,23 @@
 using UnityEngine;
 
-public class EnemyScripts : MonoBehaviour
+public class EnemyScript : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private float speed = 2f;
+    private Transform target;
+    
+    public void ChaseTarget(Transform targetTransform)
     {
-        
+        target = targetTransform;
+
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void Update()
     {
-        
+        if (target != null)
+        {
+            Vector3 direction = (target.position - transform.position).normalized;
+            transform.position += direction * speed * Time.deltaTime;
+        }
     }
 }

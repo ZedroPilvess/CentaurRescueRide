@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7093749704367924284}
   - component: {fileID: 4262141640975955445}
   m_Layer: 8
-  m_Name: Item
+  m_Name: Item 2
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2640871827649562430, guid: 75fb7afbca98c854eaf8ade059faf25b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.43290627, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -152,4 +152,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a21bbf537988e8408182d6e1e9b34ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemCollectable
-  Item: {fileID: 11400000, guid: 937d7e21d72b9fb43a23f89e10f028b5, type: 2}
+  Item: {fileID: 11400000, guid: dd8f60313c48e7a4e84df5ab51459e9d, type: 2}

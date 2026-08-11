@@ -9,6 +9,8 @@ public class PlayerHeadMovement : MonoBehaviour
 
     [SerializeField] float offset;
 
+    [SerializeField] public Vector3 mousePos;
+
     void Start()
     {
         aimAction = InputSystem.actions.FindAction("Aim");
@@ -24,7 +26,7 @@ public class PlayerHeadMovement : MonoBehaviour
     {
          Vector2 MouseScreenPos =   aimAction.ReadValue<Vector2>();
 
-        Vector3 mousePos = camera.ScreenToWorldPoint(MouseScreenPos);
+         mousePos = camera.ScreenToWorldPoint(MouseScreenPos);
 
         Vector2 dir = transform.position - mousePos;
 

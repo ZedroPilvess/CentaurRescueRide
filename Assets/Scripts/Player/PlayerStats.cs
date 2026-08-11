@@ -5,7 +5,7 @@ public class PlayerStats : MonoBehaviour
 {
     [SerializeField] public int hp;
     
-    [SerializeField] public int maxHP = 100;
+    [SerializeField] public int maxHP = 3;
 
     [SerializeField] public int rescuedTargets = 0; 
 
@@ -28,5 +28,26 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
- 
+
+
+    public void TakeDamage(int damage)
+    {
+        hp -= damage;
+        if (hp <= 0)
+        {
+            Die();
+        }
+        if (hp > maxHP) 
+        { 
+            hp = maxHP; 
+
+        }
+    }   
+
+
+    private void Die()
+    {
+        Debug.Log("Player Died");
+        // Add death logic here (e.g., play animation, disable player controls, etc.)
+    }
 }

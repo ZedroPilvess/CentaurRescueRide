@@ -5,27 +5,29 @@ using UnityEngine.InputSystem;
 
 public class PlayerWeapons : MonoBehaviour
 {
-    [SerializeField] PlayerStats ps;
+    [Header("Player References")]
+    [SerializeField] private PlayerStats ps;
+    [SerializeField] private PlayerHeadMovement phm;
 
-    [SerializeField] InputAction shoot;
-    // [SerializeField] InputAction kick;
+    [Header("Input")]
+    [SerializeField] private InputAction shoot;
+    //[SerializeField] private InputAction kick;
 
+    [Header("Weapon Points")]
+    [SerializeField] private Transform shootPoint;
+    [SerializeField] private GameObject shurikenPoint1;
+    [SerializeField] private GameObject shurikenPoint2;
+    [SerializeField] private GameObject shurikenPoint3;
 
+    [Header("Weapon Prefabs")]
+    [SerializeField] private GameObject bulletObj;
+    [SerializeField] private GameObject bombObj;
+    [SerializeField] private GameObject shurikenObj;
+    [SerializeField] private GameObject punchHitbox;
 
-    [SerializeField] Transform shootPoint;
-
-    [SerializeField] GameObject bulletObj;
-
-    [SerializeField] GameObject bombObj;
-
-    [SerializeField] GameObject shurikenObj;
-
-    [SerializeField] GameObject punchHitbox;
-
-
-    [SerializeField] bool isPreparing = false;
-
-    [SerializeField] float preparationCount = 0f;
+    [Header("Punch")]
+    [SerializeField] private bool isPreparing = false;
+    [SerializeField] private float preparationCount = 0f;
 
     void Start()
     {
@@ -39,6 +41,7 @@ public class PlayerWeapons : MonoBehaviour
 
     private void StopShoot()
     {
+        if(ps.equipedItem == null) return;
         switch (ps.equipedItem.Type)
         {
              
@@ -70,6 +73,9 @@ public class PlayerWeapons : MonoBehaviour
                     break;
                 case ItemType.Punch:
                     PreparePunch();
+                    break;
+                case ItemType.Empty:
+                    Debug.Log("No weapon equipped");
                     break;
             }
         }
@@ -110,7 +116,7 @@ public class PlayerWeapons : MonoBehaviour
 
     void ReleasePunch()
     {
-        preparationCount = 0f;
+        
         isPreparing = false;
         StartCoroutine(PunchCoroutine());
     }
@@ -123,6 +129,7 @@ public class PlayerWeapons : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
 
         punchHitbox.SetActive(false);
+        preparationCount = 0f;
 
     }
 
@@ -146,25 +153,83 @@ public class PlayerWeapons : MonoBehaviour
 
     void ThrowBomb()
     {
+        isPreparing = false;
+        
+        Vector2 target = phm.mousePos;
 
+        GameObject obj = Instantiate(bombObj, shootPoint.position, Quaternion.identity);
 
+         GoToTarget(obj, target);
 
+       
     }
 
 
     #endregion
 
-    void ThrowShuriken()
-     {
-        
-     }
 
-    
+    #region ShurikenLogic
+ void ThrowShuriken()
+{
+    GameObject shuriken1 = Instantiate(
+        shurikenObj,
+        shurikenPoint1.transform.position,
+        Quaternion.identity
+    );
 
-     void ShootFuzil()
+    GameObject shuriken2 = Instantiate(
+        shurikenObj,
+        shurikenPoint2.transform.position,
+        Quaternion.identity
+    );
+
+    GameObject shuriken3 = Instantiate(
+        shurikenObj,
+        shurikenPoint3.transform.position,
+        Quaternion.identity
+    );
+
+        ThrowShurikenUp(shuriken1, shurikenPoint1.transform);
+        ThrowShurikenUp(shuriken2, shurikenPoint2.transform);
+        ThrowShurikenUp(shuriken3, shurikenPoint3.transform);
+    }
+    void ThrowShurikenUp(GameObject shuriken, Transform point)
     {
-         
+        Rigidbody2D rb = shuriken.GetComponent<Rigidbody2D>();
+        WeaponStatus weaponStatus = shuriken.GetComponent<WeaponStatus>();
+
+        rb.AddForce(point.up * weaponStatus.speed,ForceMode2D.Impulse);
+        rb.AddTorque(10f, ForceMode2D.Impulse);
+    }
+
+    #endregion
+
+    #region GunLogic
+    void ShootFuzil()
+    {
+        GameObject obj = Instantiate(bulletObj, shootPoint.position, shootPoint.rotation);
+
+        GoToTarget(obj, phm.mousePos);
+
+
+
+
+
     }
 
 
+
+    #endregion
+
+
+    void GoToTarget(GameObject obj, Vector2 target)
+    {
+        Vector2 direction = (target - (Vector2)obj.transform.position).normalized;
+        
+        obj.GetComponent<Rigidbody2D>().AddForce(direction * obj.GetComponent<WeaponStatus>().speed * ((1 + preparationCount) ) , ForceMode2D.Impulse);
+       
+        Debug.Log("velocity : " + obj.GetComponent<Rigidbody2D>().linearVelocity);
+        Debug.Log("preparationCount : " + preparationCount);
+
+    }
 }
