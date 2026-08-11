@@ -1,10 +1,18 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
     [SerializeField] private float speed = 2f;
     private Transform target;
-    
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private bool canDamage = true;
+
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();   
+    }
     public void ChaseTarget(Transform targetTransform)
     {
         target = targetTransform;
@@ -17,7 +25,25 @@ public class EnemyScript : MonoBehaviour
         if (target != null)
         {
             Vector3 direction = (target.position - transform.position).normalized;
-            transform.position += direction * speed * Time.deltaTime;
+            rb.linearVelocity = direction * speed;
         }
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && canDamage)
+        {
+           collision.gameObject.GetComponent<PlayerStats>().TakeDamage(1);
+            StartCoroutine(DamageCooldown());
+        }
+    }
+
+
+    IEnumerator DamageCooldown()
+    {
+        canDamage = false;
+        yield return new WaitForSeconds(1f);
+        canDamage = true;
     }
 }
