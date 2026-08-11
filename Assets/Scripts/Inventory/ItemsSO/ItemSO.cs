@@ -5,10 +5,8 @@ public enum ItemType
     Gun,
     Bomb,
     Shuriken,
-    Punch
-
-
-
+    Punch,
+    Empty
 }
 
 [CreateAssetMenu(fileName = "NovoItem",menuName ="items")]

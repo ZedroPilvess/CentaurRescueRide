@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7d9853cd4ae19d4887abaa03213c17d, type: 3}
-  m_Name: Fuzil
+  m_Name: Empty
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
-  Type: 0
-  itemSprite: {fileID: 2640871827649562430, guid: 75fb7afbca98c854eaf8ade059faf25b, type: 3}
+  Type: 4
+  itemSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}

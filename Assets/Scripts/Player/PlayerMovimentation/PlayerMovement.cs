@@ -17,7 +17,6 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-
     void Start()
     {
         moveAction = InputSystem.actions.FindAction("Foward");
@@ -26,16 +25,8 @@ public class PlayerMovement : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
 
        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-   
-
+    }  
+       
     private void FixedUpdate()
     {
         Move();

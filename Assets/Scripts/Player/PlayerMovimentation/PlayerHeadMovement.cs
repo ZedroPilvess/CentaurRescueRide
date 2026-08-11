@@ -14,8 +14,7 @@ public class PlayerHeadMovement : MonoBehaviour
         aimAction = InputSystem.actions.FindAction("Aim");
         camera = Camera.main;   
     }
-
-    // Update is called once per frame
+     
     void Update()
     {
         LockToCamera();
