@@ -272,6 +272,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 208795152}
   m_CullTransparentMesh: 1
+--- !u!1 &297620611
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 297620612}
+  m_Layer: 0
+  m_Name: PunchZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &297620612
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297620611}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.03, y: 0.81, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2121182990}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &315846076
 GameObject:
   m_ObjectHideFlags: 0
@@ -1445,6 +1476,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4262141640975955445, guid: bf69f99cdc316724090f0fd50a17a864, type: 3}
+      propertyPath: Item
+      value: 
+      objectReference: {fileID: 11400000, guid: 49010e7970fc1fb4a9562c18a59bb7ec, type: 2}
     - target: {fileID: 4441455534186314799, guid: bf69f99cdc316724090f0fd50a17a864, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.42548
@@ -1661,6 +1696,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28c53fc3611af8b4f840c82b274f8f6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWeapons
+  ps: {fileID: 1187589308}
+  shoot:
+    m_Name: Shoot
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 5ac6c231-79ff-4737-9f4f-45a2ae0dde6b
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+    m_Priority: 0
+  shootPoint: {fileID: 0}
+  bulletObj: {fileID: 0}
+  bombObj: {fileID: 0}
+  shurikenObj: {fileID: 0}
+  punchHitbox: {fileID: 297620611}
+  isPreparing: 0
+  preparationCount: 0
 --- !u!1001 &1295512715
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2130,6 +2183,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2071111469}
+  - {fileID: 297620612}
   m_Father: {fileID: 1187589305}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2121182991

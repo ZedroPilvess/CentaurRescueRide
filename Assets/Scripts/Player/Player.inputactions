@@ -3,7 +3,7 @@
     "name": "Player",
     "maps": [
         {
-            "name": "Movement",
+            "name": "Player",
             "id": "32462ec1-7ab3-4e17-88b0-7296211fd890",
             "actions": [
                 {
@@ -34,6 +34,56 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true,
+                    "priority": 0
+                },
+                {
+                    "name": "DestroyItem",
+                    "type": "Button",
+                    "id": "4b9bdc5a-0b18-465e-bfef-329592a72a38",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "InventoryRight",
+                    "type": "Button",
+                    "id": "735b5ab7-9d32-45f2-b3a6-807f1ed74e9f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "Inventoryleft",
+                    "type": "Button",
+                    "id": "cebd5bc4-637b-4a5c-8afa-f30cf7c620ea",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "Shoot",
+                    "type": "Button",
+                    "id": "2f3ed394-8cfc-48e9-9232-31baa55f96ed",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "Kick",
+                    "type": "Button",
+                    "id": "af33187d-f59a-4d60-b835-53675794cb6f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
                     "priority": 0
                 }
             ],
@@ -191,92 +241,10 @@
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Inventory",
-            "id": "130252d1-e665-4590-b01a-cf343c528766",
-            "actions": [
-                {
-                    "name": "Inventoryleft",
-                    "type": "Button",
-                    "id": "49d43a70-22af-4a37-b909-69aacdf25e7e",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false,
-                    "priority": 0
-                },
-                {
-                    "name": "InventoryRight",
-                    "type": "Button",
-                    "id": "c4a7281a-f19b-4b2c-ab5b-c42ab03c4424",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false,
-                    "priority": 0
-                },
-                {
-                    "name": "DestroyItem",
-                    "type": "Button",
-                    "id": "48e573d6-1b0f-4df8-91b3-7cf2d590ae54",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false,
-                    "priority": 0
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "cb41e9a8-8ac1-4ded-8dfa-3198c658bb8c",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Inventoryleft",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "a75afcef-2d22-4901-a774-61564d1c8a4e",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Inventoryleft",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "08d31c00-054c-49c9-a870-f278aa1bc917",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "InventoryRight",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3d7dc4b6-7829-4c0c-aaa9-7c3314f4cb9e",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "InventoryRight",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "aa6f2ceb-88f7-4231-b74d-f81a9ce584ac",
+                    "id": "7bec9c2a-ccad-4287-b85b-aa35a1385a3e",
                     "path": "<Keyboard>/g",
                     "interactions": "",
                     "processors": "",
@@ -287,12 +255,100 @@
                 },
                 {
                     "name": "",
-                    "id": "7cb0dd2e-cc87-404f-b977-fb22d008d0a6",
+                    "id": "5ec6327e-ff72-4a50-bf81-43368f33a910",
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "DestroyItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "740fbeec-c1f6-4c52-bd73-276c602d0671",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InventoryRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eb7901d4-4c31-47e8-93d7-b3e942ac7241",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InventoryRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4d753f08-a9a3-499f-b44f-6c3d9cb2fc91",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Inventoryleft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "45e484eb-ed0f-4c43-a366-70dfbb6037d6",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Inventoryleft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ee04f154-6565-4ee3-a3b2-3bfec7a38ea5",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7db99965-1d9b-4d8a-9864-09ac49877a3b",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ca1a9f5f-95fd-4b43-9d3e-7372819ce3ac",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Kick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5d8829a4-ce77-4978-bd23-2829d457c316",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Kick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
