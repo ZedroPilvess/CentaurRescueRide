@@ -71,6 +71,11 @@ public class NpcScript : MonoBehaviour
     {
         npcDialogueUI.SetActive(false);
         goTarget.SetActive(true);   
+
+       int  roll= Random.Range(0, questManager.QuestTargets.Count);
+
+
+        goTarget.transform.position = questManager.QuestTargets[roll].position;
         questState = QuestState.go; 
         if (questManager != null)
         {
@@ -85,7 +90,19 @@ public class NpcScript : MonoBehaviour
         if (questState == QuestState.go)
         {
             bringTarget.SetActive(true);
-            questState = QuestState.bring;
+            int roll1= Random.Range(0, 100);
+            if (roll1 <= 30)
+            {
+                bringTarget.transform.position = transform.position + new Vector3(2, 0, 0);
+
+
+            }
+            else
+            {
+                int roll2 = Random.Range(0, questManager.BringTargets.Count);
+                bringTarget.transform.position = questManager.BringTargets[roll2].position;
+            }
+                questState = QuestState.bring;
 
             playerStats.QuestTarget(bringTarget.transform);
         }

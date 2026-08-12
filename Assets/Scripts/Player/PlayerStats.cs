@@ -30,7 +30,7 @@ public class PlayerStats : MonoBehaviour
             if (!inventoryManager.IsIventoryFull())
             {
                 inventoryManager.AddItem(collision.GetComponent<ItemCollectable>().Item);
-                collision.gameObject.SetActive(false);
+               Destroy(collision.gameObject);
 
             }     
         }

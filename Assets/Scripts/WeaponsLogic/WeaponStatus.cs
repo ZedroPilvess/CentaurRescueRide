@@ -11,11 +11,18 @@ public class WeaponStatus : MonoBehaviour
 
     [SerializeField] GameObject explosionEffect;
 
+    [SerializeField] bool projectile =true;
+
     private void Start()
     {
         if (bomb)
         {
             StartCoroutine(BombExplosion());
+        }
+
+        if(projectile)
+        {
+            Destroy(gameObject, 3f);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -29,6 +36,11 @@ public class WeaponStatus : MonoBehaviour
 
 
             Destroy(gameObject);
+        }
+
+        if(collision.CompareTag("Enemy"))
+        {
+            collision.gameObject.GetComponent<EnemyScript>().TakeDamage();
         }
 
 

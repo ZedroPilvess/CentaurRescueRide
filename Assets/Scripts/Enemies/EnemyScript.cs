@@ -8,7 +8,7 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private bool canDamage = true;
 
-
+    [SerializeField] float hp = 4;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();   
@@ -18,8 +18,22 @@ public class EnemyScript : MonoBehaviour
         target = targetTransform;
 
     }
+    public void TakeDamage()
+    {
+               hp--;
+        if (hp <= 0)
+        {
+           StartCoroutine(DieAfterDelay());
+        }
+    }
 
 
+    IEnumerator DieAfterDelay()
+    {
+        speed = 0f;
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
+    }
     private void Update()
     {
         if (target != null)
