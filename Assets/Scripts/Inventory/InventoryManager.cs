@@ -24,6 +24,10 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private RectTransform selectedUI;
     [SerializeField] private List<RectTransform> itemUIPosition = new List<RectTransform>();
 
+    [Header("Drag & Drop")]
+    [SerializeField] private List<InventorySwapLogic> inventorySlots = new List<InventorySwapLogic>();
+    [SerializeField] private Canvas inventoryCanvas;
+
     [Header("Player")]
     [SerializeField] private PlayerStats ps;
     [SerializeField] private PlayerHeadAnimation headAnimation;
@@ -42,7 +46,36 @@ public class InventoryManager : MonoBehaviour
     {
         UpdateUI();
 
+
+        SetupInventorySlots();
+        InitializeInventory();
         StartCoroutine(DelayThenSwitch());
+    }
+
+
+    private void SetupInventorySlots()
+    {
+        for (int i = 0; i < inventorySlots.Count; i++)
+        {
+            inventorySlots[i].Setup(
+                i,
+                this,
+                inventoryCanvas
+            );
+        }
+    }
+
+    private void InitializeInventory()
+    {
+        while (itemsList.Count < inventorySize)
+        {
+            itemsList.Add(emptyItem);
+        }
+
+        while (itemsList.Count > inventorySize)
+        {
+            itemsList.RemoveAt(itemsList.Count - 1);
+        }
     }
 
 
@@ -233,5 +266,36 @@ public class InventoryManager : MonoBehaviour
 
         return true;
     }
-    
+
+    public bool IsSlotEmpty(int index)
+    {
+        if (index < 0 || index >= itemsList.Count)
+            return true;
+
+        if (itemsList[index] == null)
+            return true;
+
+        return itemsList[index].Type == ItemType.Empty;
+    }
+
+    public void SwapItems(int fromIndex, int toIndex)
+    {
+        if (fromIndex < 0 || fromIndex >= itemsList.Count)
+            return;
+
+        if (toIndex < 0 || toIndex >= itemsList.Count)
+            return;
+
+        ItemSO temp = itemsList[fromIndex];
+
+        itemsList[fromIndex] = itemsList[toIndex];
+        itemsList[toIndex] = temp;
+
+        Debug.Log(
+            $"Swapped inventory slots {fromIndex} and {toIndex}"
+        );
+
+        UpdateUI();
+    }
+
 }

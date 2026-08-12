@@ -1521,6 +1521,7 @@ GameObject:
   - component: {fileID: 376294376}
   - component: {fileID: 376294378}
   - component: {fileID: 376294377}
+  - component: {fileID: 376294379}
   m_Layer: 5
   m_Name: BackGround
   m_TagString: Untagged
@@ -1586,6 +1587,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 376294375}
   m_CullTransparentMesh: 1
+--- !u!114 &376294379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376294375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebaa45e97b0996244a5b316701daf726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventorySwapLogic
+  slotIndex: 0
+  inventoryManager: {fileID: 1187589311}
+  itemImage: {fileID: 387208851}
 --- !u!1 &387208849
 GameObject:
   m_ObjectHideFlags: 0
@@ -4709,6 +4725,7 @@ GameObject:
   - component: {fileID: 1040711668}
   - component: {fileID: 1040711670}
   - component: {fileID: 1040711669}
+  - component: {fileID: 1040711671}
   m_Layer: 5
   m_Name: BackGround (2)
   m_TagString: Untagged
@@ -4774,6 +4791,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1040711667}
   m_CullTransparentMesh: 1
+--- !u!114 &1040711671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040711667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebaa45e97b0996244a5b316701daf726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventorySwapLogic
+  slotIndex: 2
+  inventoryManager: {fileID: 1187589311}
+  itemImage: {fileID: 905570446}
 --- !u!4 &1046721366 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5927804974648942900, guid: bbaa4813e6c1a13459b97fca6ff4a9d0, type: 3}
@@ -5616,6 +5648,8 @@ MonoBehaviour:
   - {fileID: 1842572848}
   - {fileID: 1040711668}
   - {fileID: 1875370019}
+  inventorySlots: []
+  inventoryCanvas: {fileID: 553850353}
   ps: {fileID: 1187589308}
   headAnimation: {fileID: 1187589312}
   fuzilItem: {fileID: 0}
@@ -7755,6 +7789,7 @@ GameObject:
   - component: {fileID: 1842572848}
   - component: {fileID: 1842572850}
   - component: {fileID: 1842572849}
+  - component: {fileID: 1842572851}
   m_Layer: 5
   m_Name: BackGround (1)
   m_TagString: Untagged
@@ -7820,6 +7855,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1842572847}
   m_CullTransparentMesh: 1
+--- !u!114 &1842572851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842572847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebaa45e97b0996244a5b316701daf726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventorySwapLogic
+  slotIndex: 1
+  inventoryManager: {fileID: 1187589311}
+  itemImage: {fileID: 1027956567}
 --- !u!4 &1861723262 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5927804974648942900, guid: bbaa4813e6c1a13459b97fca6ff4a9d0, type: 3}
@@ -7836,6 +7886,7 @@ GameObject:
   - component: {fileID: 1875370019}
   - component: {fileID: 1875370021}
   - component: {fileID: 1875370020}
+  - component: {fileID: 1875370022}
   m_Layer: 5
   m_Name: BackGround (3)
   m_TagString: Untagged
@@ -7901,6 +7952,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1875370018}
   m_CullTransparentMesh: 1
+--- !u!114 &1875370022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875370018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebaa45e97b0996244a5b316701daf726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventorySwapLogic
+  slotIndex: 3
+  inventoryManager: {fileID: 1187589311}
+  itemImage: {fileID: 208795154}
 --- !u!1001 &1876846176
 PrefabInstance:
   m_ObjectHideFlags: 0
