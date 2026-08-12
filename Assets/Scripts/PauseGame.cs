@@ -15,6 +15,11 @@ public class PauseGame : MonoBehaviour
 
     [SerializeField] InputAction pauseGame;
 
+    private void Awake()
+    {
+        Time.timeScale = 1.0f;  
+    }
+
     private void Start()
     {
         pauseGame = InputSystem.actions.FindAction("Pause");
