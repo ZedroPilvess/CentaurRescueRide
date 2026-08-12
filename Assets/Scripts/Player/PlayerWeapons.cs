@@ -35,6 +35,15 @@ public class PlayerWeapons : MonoBehaviour
     [Header("UI")]
     [SerializeField] bool isOverUI = false;
 
+
+    [Header("Sounds")]
+
+    [SerializeField] AudioSource audioSource;
+    
+    [SerializeField] AudioClip shootClip;
+    [SerializeField] AudioClip shurikenClip;
+    [SerializeField] AudioClip punchClip;
+
     private void OnEnable()
     {
         shoot = InputSystem.actions.FindAction("Shoot");
@@ -162,7 +171,7 @@ public class PlayerWeapons : MonoBehaviour
     {
         punchHitbox.GetComponent<Punch>().bonusDmg = preparationCount;
         punchHitbox.SetActive(true);
-
+        audioSource.PlayOneShot(punchClip);
         yield return new WaitForSeconds(0.3f);
 
         punchHitbox.SetActive(false);
@@ -230,6 +239,8 @@ public class PlayerWeapons : MonoBehaviour
         ThrowShurikenUp(shuriken1, shurikenPoint1.transform);
         ThrowShurikenUp(shuriken2, shurikenPoint2.transform);
         ThrowShurikenUp(shuriken3, shurikenPoint3.transform);
+
+        audioSource.PlayOneShot(shurikenClip);
     }
     void ThrowShurikenUp(GameObject shuriken, Transform point)
     {
@@ -248,7 +259,7 @@ public class PlayerWeapons : MonoBehaviour
         GameObject obj = Instantiate(bulletObj, shootPoint.position, shootPoint.rotation);
 
         GoToTarget(obj, phm.mousePos);
-
+        audioSource.PlayOneShot(shootClip);
 
 
 

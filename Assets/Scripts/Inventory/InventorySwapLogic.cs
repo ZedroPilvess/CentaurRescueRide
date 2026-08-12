@@ -42,7 +42,7 @@ public class InventorySwapLogic : MonoBehaviour,
 
         if (canvas == null)
         {
-            Debug.LogError("Inventory Canvas is not assigned!");
+             
             return;
         }
 

@@ -1,11 +1,17 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
     [SerializeField] public int hp;
     
     [SerializeField] public int maxHP = 3;
+    [SerializeField] Sprite spriteFullHP;
+    [SerializeField] Sprite spriteHurtHP;
+    [SerializeField] Sprite spriteDyingHP;
+
+    [SerializeField] Image hpImg;
 
     [SerializeField] public int rescuedTargets = 0; 
 
@@ -22,6 +28,10 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] bool isQuesting = false;
 
     [SerializeField] public  GameObject piggyBackObj;
+
+    [SerializeField] AudioSource source;
+
+    [SerializeField] AudioClip hurtSound;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -44,11 +54,31 @@ public class PlayerStats : MonoBehaviour
         if (hp <= 0)
         {
             Die();
+            return;
         }
         if (hp > maxHP) 
         { 
             hp = maxHP; 
 
+        }
+
+        switch (hp)
+        {
+            case 1:
+
+                hpImg.sprite = spriteDyingHP;
+
+
+            break;
+
+            case 2:
+  
+               hpImg.sprite = spriteHurtHP;
+            break;
+
+            case 3:
+               hpImg.sprite= spriteFullHP;
+             break;
         }
     }
     private void Update()
