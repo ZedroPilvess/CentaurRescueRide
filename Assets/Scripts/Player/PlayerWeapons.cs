@@ -9,6 +9,7 @@ public class PlayerWeapons : MonoBehaviour
     [Header("Player References")]
     [SerializeField] private PlayerStats ps;
     [SerializeField] private PlayerHeadMovement phm;
+    [SerializeField] private PlayerHeadAnimation playerHeadAnim;
 
     [Header("Input")]
     [SerializeField] private InputAction shoot;
@@ -64,6 +65,8 @@ public class PlayerWeapons : MonoBehaviour
                 ReleasePunch();
                 break;
         }
+        Debug.Log("Release");   
+        playerHeadAnim.setRelease();
     }
 
     void Shoot()
@@ -91,6 +94,8 @@ public class PlayerWeapons : MonoBehaviour
                     break;
             }
         }
+        Debug.Log("Click");
+        playerHeadAnim.setClick();
     }
 
 

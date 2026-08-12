@@ -25,6 +25,7 @@ public class InventoryManager : MonoBehaviour
 
     [Header("Player")]
     [SerializeField] private PlayerStats ps;
+    [SerializeField] private PlayerHeadAnimation headAnimation;
 
     [Header("Items")]
     [SerializeField] private ItemSO fuzilItem;
@@ -59,7 +60,7 @@ public class InventoryManager : MonoBehaviour
             currentItem = inventorySize - 1;
         }
         Debug.Log("Current item index: " + currentItem);
-        
+         
         UpdateUI();
     }   
 
@@ -159,7 +160,8 @@ public class InventoryManager : MonoBehaviour
 
     public void UpdateItem()
     {
-               ps.equipedItem = itemsList[currentItem];
+        ps.equipedItem = itemsList[currentItem];
+        headAnimation.changeWeaponAnimState();
     }
 
     public bool IsIventoryFull()

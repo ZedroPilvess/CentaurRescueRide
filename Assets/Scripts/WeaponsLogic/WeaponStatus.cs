@@ -28,13 +28,7 @@ public class WeaponStatus : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!bomb)
-        {
-            
-
-           
-          
-
-
+        { 
             Destroy(gameObject);
         }
 

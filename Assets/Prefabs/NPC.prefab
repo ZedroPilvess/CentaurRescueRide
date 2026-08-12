@@ -185,7 +185,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 0.11792451, b: 0.69821966, a: 1}
@@ -1474,5 +1474,6 @@ MonoBehaviour:
   questInProgressTxt: {fileID: 2265035380379664953}
   playerStats: {fileID: 0}
   questState: 0
+  npcID: 0
   goTarget: {fileID: 1833086962456824485}
   bringTarget: {fileID: 5365074263447985878}
