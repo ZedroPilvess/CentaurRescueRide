@@ -9,6 +9,8 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private bool canDamage = true;
 
     [SerializeField] float hp = 4;
+
+    [SerializeField] Animator animator;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();   
@@ -16,11 +18,12 @@ public class EnemyScript : MonoBehaviour
     public void ChaseTarget(Transform targetTransform)
     {
         target = targetTransform;
+        animator.SetTrigger("follow");
 
     }
-    public void TakeDamage()
+    public void TakeDamage(float damage)
     {
-               hp--;
+               hp -= damage;
         if (hp <= 0)
         {
            StartCoroutine(DieAfterDelay());
@@ -31,6 +34,7 @@ public class EnemyScript : MonoBehaviour
     IEnumerator DieAfterDelay()
     {
         speed = 0f;
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;   
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }

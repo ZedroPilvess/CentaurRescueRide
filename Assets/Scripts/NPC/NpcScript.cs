@@ -31,7 +31,7 @@ public class NpcScript : MonoBehaviour
          questManager = GameObject.FindWithTag("QuestManager").GetComponent<QuestManager>();
         playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
 
-        transform.rotation = Quaternion.Euler(0, 0, Random.Range(0f, 360f));
+        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

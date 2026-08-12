@@ -5223,7 +5223,12 @@ MonoBehaviour:
   damage: 4
   speed: 3
   bomb: 1
+  bombAOE: 0
+  punch: 0
   explosionEffect: {fileID: 7334522498176166046}
+  projectile: 0
+  penetration: 99
+  penetrated: 0
 --- !u!50 &71810046352293499
 Rigidbody2D:
   serializedVersion: 5
@@ -5315,7 +5320,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -5336,7 +5341,12 @@ MonoBehaviour:
   damage: 5
   speed: 0
   bomb: 0
+  bombAOE: 1
+  punch: 0
   explosionEffect: {fileID: 0}
+  projectile: 0
+  penetration: 50
+  penetrated: 0
 --- !u!1 &9155314126580037353
 GameObject:
   m_ObjectHideFlags: 0

@@ -33,16 +33,36 @@ public class PlayerWeapons : MonoBehaviour
 
 
     [Header("UI")]
-    [SerializeField] bool isOverUI = false; 
+    [SerializeField] bool isOverUI = false;
 
-    void Start()
+    private void OnEnable()
     {
         shoot = InputSystem.actions.FindAction("Shoot");
 
-        shoot.performed += ctx => Shoot();
-        
-        shoot.canceled += ctx => StopShoot();
+        if (shoot != null)
+        {
+            shoot.performed += OnShootPerformed;
+            shoot.canceled += OnShootCanceled;
+        }
+    }
 
+    private void OnDisable()
+    {
+        if (shoot != null)
+        {
+            shoot.performed -= OnShootPerformed;
+            shoot.canceled -= OnShootCanceled;
+        }
+    }
+
+    private void OnShootPerformed(InputAction.CallbackContext ctx)
+    {
+        Shoot();
+    }
+
+    private void OnShootCanceled(InputAction.CallbackContext ctx)
+    {
+        StopShoot();
     }
 
     private void Update()
@@ -140,12 +160,13 @@ public class PlayerWeapons : MonoBehaviour
 
     IEnumerator PunchCoroutine()
     {
-
+        punchHitbox.GetComponent<Punch>().bonusDmg = preparationCount;
         punchHitbox.SetActive(true);
 
         yield return new WaitForSeconds(0.3f);
 
         punchHitbox.SetActive(false);
+        punchHitbox.GetComponent<Punch>().bonusDmg = 0;
         preparationCount = 0f;
 
     }
@@ -241,12 +262,16 @@ public class PlayerWeapons : MonoBehaviour
 
     void GoToTarget(GameObject obj, Vector2 target)
     {
-        Vector2 direction = (target - (Vector2)obj.transform.position).normalized;
-        
-        obj.GetComponent<Rigidbody2D>().AddForce(direction * obj.GetComponent<WeaponStatus>().speed * ((1 + preparationCount) ) , ForceMode2D.Impulse);
-       
-        Debug.Log("velocity : " + obj.GetComponent<Rigidbody2D>().linearVelocity);
-        Debug.Log("preparationCount : " + preparationCount);
+        Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
+        WeaponStatus weaponStatus = obj.GetComponent<WeaponStatus>();
 
+        Vector2 direction =
+            (target - (Vector2)obj.transform.position).normalized;
+
+        float finalSpeed = weaponStatus.speed * (1f + preparationCount);
+
+        rb.linearVelocity = direction * finalSpeed;
+
+        Debug.Log("Projectile speed: " + finalSpeed);
     }
 }

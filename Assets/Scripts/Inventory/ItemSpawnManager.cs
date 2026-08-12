@@ -14,6 +14,7 @@ public class ItemSpawnManager : MonoBehaviour
     [SerializeField] private float spawnInterval = 180f; // 3 minutes
     [SerializeField, Range(0f, 1f)] private float spawnChance = 0.3f; // 30%
     [SerializeField] private float spawnVariation = 0.5f;
+    [SerializeField] private int spawnAmount = 1;    
 
     private void Start()
     {
@@ -45,10 +46,11 @@ public class ItemSpawnManager : MonoBehaviour
             if (location == null)
                 continue;
 
-            // 30% chance
+            for(int i = 0; i< spawnAmount; i++) { 
             if (Random.value <= spawnChance)
             {
                 SpawnObject(location);
+            }
             }
         }
     }

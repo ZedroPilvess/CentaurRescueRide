@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -37,18 +38,74 @@ public class InventoryManager : MonoBehaviour
     //[Header("Testing")]
     //[SerializeField] private bool invTest = true;
 
-
     private void Start()
+    {
+        UpdateUI();
+
+        StartCoroutine(DelayThenSwitch());
+    }
+
+
+
+    IEnumerator DelayThenSwitch()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        MoveRight();
+        yield return new WaitForSeconds(0.1f);
+        MoveLeft();
+
+
+    }
+    private void OnEnable()
     {
         inventoryLeft = InputSystem.actions.FindAction("InventoryLeft");
         inventoryRight = InputSystem.actions.FindAction("InventoryRight");
         inventoryDrop = InputSystem.actions.FindAction("DestroyItem");
-        
-      //  UpdateUI();
-         
-        inventoryLeft.performed += ctx => MoveLeft();
-        inventoryRight.performed += ctx => MoveRight();
-        inventoryDrop.performed += ctx => DropItem();
+
+        inventoryLeft.performed += OnInventoryLeft;
+        inventoryRight.performed += OnInventoryRight;
+        inventoryDrop.performed += OnInventoryDrop;
+
+        inventoryLeft.Enable();
+        inventoryRight.Enable();
+        inventoryDrop.Enable();
+    }
+
+    private void OnDisable()
+    {
+        if (inventoryLeft != null)
+            inventoryLeft.performed -= OnInventoryLeft;
+
+        if (inventoryRight != null)
+            inventoryRight.performed -= OnInventoryRight;
+
+        if (inventoryDrop != null)
+            inventoryDrop.performed -= OnInventoryDrop;
+
+        if (inventoryLeft != null)
+            inventoryLeft.Disable();
+
+        if (inventoryRight != null)
+            inventoryRight.Disable();
+
+        if (inventoryDrop != null)
+            inventoryDrop.Disable();
+    }
+
+    private void OnInventoryLeft(InputAction.CallbackContext ctx)
+    {
+        MoveLeft();
+    }
+
+    private void OnInventoryRight(InputAction.CallbackContext ctx)
+    {
+        MoveRight();
+    }
+
+    private void OnInventoryDrop(InputAction.CallbackContext ctx)
+    {
+        DropItem();
     }
 
 

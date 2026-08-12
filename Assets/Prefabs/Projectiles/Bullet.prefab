@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 2364694807773836051}
   - component: {fileID: 7283807783156293001}
   m_Layer: 6
-  m_Name: GameObject 1
+  m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -158,7 +158,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -207,7 +207,11 @@ MonoBehaviour:
   damage: 1
   speed: 60
   bomb: 0
+  punch: 0
   explosionEffect: {fileID: 0}
+  projectile: 1
+  penetration: 0
+  penetrated: 0
 --- !u!1 &5502405870472303622
 GameObject:
   m_ObjectHideFlags: 0
