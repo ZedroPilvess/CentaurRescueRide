@@ -24,6 +24,8 @@ public class EnemyScript : MonoBehaviour
     public void TakeDamage(float damage)
     {
                hp -= damage;
+
+        
         if (hp <= 0)
         {
            StartCoroutine(DieAfterDelay());

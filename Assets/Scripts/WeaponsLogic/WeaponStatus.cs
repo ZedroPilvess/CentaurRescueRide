@@ -13,8 +13,7 @@ public class WeaponStatus : MonoBehaviour
 
     [SerializeField] bool bombAOE = false;  
 
-    [SerializeField] bool punch = false;    
-
+   
     [SerializeField] GameObject explosionEffect;
 
     [SerializeField] bool projectile =true;
@@ -22,6 +21,10 @@ public class WeaponStatus : MonoBehaviour
     [SerializeField] int penetration =0;
     [SerializeField] int penetrated =0;
 
+
+    [SerializeField] AudioSource source;
+
+    [SerializeField] AudioClip bombClip;
     private void Start()
     {
         if (bomb)
@@ -68,7 +71,7 @@ public class WeaponStatus : MonoBehaviour
         gameObject.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
 
         explosionEffect.SetActive(true);
-
+        source.PlayOneShot(bombClip);
         yield return new WaitForSeconds(0.5f);
 
         Destroy(gameObject);    

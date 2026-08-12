@@ -4,6 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using TMPro;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -23,6 +25,9 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private List<Image> imagesList = new List<Image>();
     [SerializeField] private RectTransform selectedUI;
     [SerializeField] private List<RectTransform> itemUIPosition = new List<RectTransform>();
+
+    [SerializeField] private TMP_Text textName;
+    [SerializeField] private TMP_Text textDesc;
 
     [Header("Drag & Drop")]
     [SerializeField] private List<InventorySwapLogic> inventorySlots = new List<InventorySwapLogic>();
@@ -44,11 +49,13 @@ public class InventoryManager : MonoBehaviour
 
     private void Start()
     {
+        InitializeInventory();
+        SetupInventorySlots();
+
+        LoadGame();
+
         UpdateUI();
 
-
-        SetupInventorySlots();
-        InitializeInventory();
         StartCoroutine(DelayThenSwitch());
     }
 
@@ -64,6 +71,10 @@ public class InventoryManager : MonoBehaviour
             );
         }
     }
+
+
+
+
 
     private void InitializeInventory()
     {
@@ -169,6 +180,7 @@ public class InventoryManager : MonoBehaviour
     void DropItem()
     {
                RemoveItem(currentItem);
+        ps.TakeDamage(-1);
          
         Debug.Log("Item dropped from index: " + currentItem);
 
@@ -216,12 +228,22 @@ public class InventoryManager : MonoBehaviour
 
     public void SaveGame()
     {
-        PlayerPrefs.SetString("Inventory", string.Join(",", itemsList.ConvertAll(item => item.name)));
+        List<string> itemNames = new List<string>();
+
+        foreach (ItemSO item in itemsList)
+        {
+            if (item == null)
+                itemNames.Add(emptyItem.name);
+            else
+                itemNames.Add(item.name);
+        }
+
+        PlayerPrefs.SetString("Inventory",string.Join(",", itemNames));
         PlayerPrefs.SetInt("RescuedTargets", ps.rescuedTargets);
 
         PlayerPrefs.SetInt("PlayerHP", ps.hp);
 
-        PlayerPrefs.SetString("EquippedItem", itemsList[currentItem].name);
+        PlayerPrefs.SetInt("EquippedItem", currentItem);
 
         PlayerPrefs.SetFloat("PlayerX", ps.playerObj.transform.position.x);
         PlayerPrefs.SetFloat("PlayerY", ps.playerObj.transform.position.y);
@@ -229,6 +251,92 @@ public class InventoryManager : MonoBehaviour
 
         PlayerPrefs.Save();
         Debug.Log("Game saved successfully!");
+    }
+
+    public void LoadGame()
+    {
+        if (!PlayerPrefs.HasKey("Inventory"))
+        {
+            Debug.Log("No save data found. Starting new game.");
+            return;
+        }
+
+        // Load inventory
+        string savedInventory = PlayerPrefs.GetString("Inventory");
+
+        string[] savedItems = savedInventory.Split(',');
+
+        for (int i = 0; i < inventorySize; i++)
+        {
+            if (i < savedItems.Length)
+            {
+                ItemSO item = FindItemByName(savedItems[i]);
+
+                if (item != null)
+                {
+                    itemsList[i] = item;
+                }
+                else
+                {
+                    Debug.LogWarning(
+                        $"Could not find ItemSO named: {savedItems[i]}"
+                    );
+
+                    itemsList[i] = emptyItem;
+                }
+            }
+            else
+            {
+                itemsList[i] = emptyItem;
+            }
+        }
+
+        // Load player data
+        if (ps != null)
+        {
+            ps.rescuedTargets =
+                PlayerPrefs.GetInt("RescuedTargets", ps.rescuedTargets);
+
+            ps.hp =
+                PlayerPrefs.GetInt("PlayerHP", ps.hp);
+
+            float playerX =
+                PlayerPrefs.GetFloat("PlayerX", ps.playerObj.transform.position.x);
+
+            float playerY =
+                PlayerPrefs.GetFloat("PlayerY", ps.playerObj.transform.position.y);
+
+            ps.playerObj.transform.position =
+                new Vector3(playerX, playerY, ps.playerObj.transform.position.z);
+        }
+
+        // Load equipped item
+        currentItem = PlayerPrefs.GetInt("EquippedItem", 0);
+
+        Debug.Log("Game loaded successfully!");
+    }
+
+    private ItemSO FindItemByName(string itemName)
+    {
+        if (string.IsNullOrEmpty(itemName))
+            return emptyItem;
+
+        if (fuzilItem != null && fuzilItem.name == itemName)
+            return fuzilItem;
+
+        if (bombItem != null && bombItem.name == itemName)
+            return bombItem;
+
+        if (shurikenItem != null && shurikenItem.name == itemName)
+            return shurikenItem;
+
+        if (punchItem != null && punchItem.name == itemName)
+            return punchItem;
+
+        if (emptyItem != null && emptyItem.name == itemName)
+            return emptyItem;
+
+        return null;
     }
 
     void UpdateUI()
@@ -241,7 +349,8 @@ public class InventoryManager : MonoBehaviour
              
 
         }
-
+        textDesc.text = itemsList[currentItem].description;
+        textName.text = itemsList[currentItem].name;    
 
       UpdateItem(); 
 
@@ -258,7 +367,7 @@ public class InventoryManager : MonoBehaviour
     {
         foreach (var item in itemsList)
         {
-            if (item.Type == ItemType.Empty || item == null )
+            if   (item == null || item.Type == ItemType.Empty)  
             {
                 return false;
             }

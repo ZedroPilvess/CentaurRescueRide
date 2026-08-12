@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
   Type: 2
   itemSprite: {fileID: 21300000, guid: 16750df55f26f704399a5daace3d15c3, type: 3}
+  itemName: shuriken
+  description: Arc throwing stars

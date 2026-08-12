@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
   Type: 3
   itemSprite: {fileID: -6998747581589165210, guid: 3f538c07bb6028f4aa4a1a9915a47f05, type: 3}
+  itemName: Boxing Gloves
+  description: BONK!

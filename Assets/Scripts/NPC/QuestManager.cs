@@ -15,7 +15,7 @@ public class QuestManager : MonoBehaviour
 
     [SerializeField]  GameObject Npc;
 
-     
+    [SerializeField] InventoryManager inventoryManager;
 
     [Header("Quest Positions")]
     [SerializeField] private List<QuestPos> questPositions = new List<QuestPos>();
@@ -27,10 +27,12 @@ public class QuestManager : MonoBehaviour
 
     private void Start()
     {
-        CreateNewQuests();
+        
     }
     public void CreateNewQuests()
     {
+        
+        inventoryManager.SaveGame();
             
        RollForQuests();
 
