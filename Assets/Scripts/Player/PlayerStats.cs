@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
@@ -92,7 +93,7 @@ public class PlayerStats : MonoBehaviour
     private void Die()
     {
         Debug.Log("Player Died");
-        // Add death logic here (e.g., play animation, disable player controls, etc.)
+        SceneManager.LoadScene("Menu");
     }
 
 
